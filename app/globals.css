@@ -88,3 +88,22 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
+
+/* Navbar Indicator */
+.nav-indicator {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  background-color: #10b981; /* emerald-500 */
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0; /* Hidden initially, GSAP will show it */
+  transform-origin: left center;
+}
+
+/* Mobile Menu GSAP Styles */
+.mobile-menu-overlay {
+  opacity: 0;
+  visibility: hidden;
+}

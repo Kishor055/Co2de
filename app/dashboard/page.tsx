@@ -1,9 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MetricsDisplay, EnergyScoreChart, AIReviewCard } from "@/components/dashboard";
-import { FileCode, Clock, TrendingUp, Calendar } from "lucide-react";
 import Link from "next/link";
+import { FileCode, Clock, TrendingUp, Upload, User, Settings, LogOut } from "lucide-react";
+
+interface UserData {
+  name: string;
+  email: string;
+}
 
 const mockHistory = [
   {
@@ -33,20 +37,61 @@ const mockHistory = [
 ];
 
 export default function DashboardPage() {
+  const [user, setUser] = useState<UserData | null>(null);
   const [analyses] = useState(mockHistory);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("co2de_user");
+    if (stored) {
+      try {
+        setUser(JSON.parse(stored));
+      } catch {}
+    }
+    setIsLoading(false);
+  }, []);
 
   const totalEnergy = analyses.reduce((sum, a) => sum + a.metrics.estimatedEnergy, 0);
   const totalCO2 = analyses.reduce((sum, a) => sum + a.metrics.estimatedCO2, 0);
   const avgScore = analyses.reduce((sum, a) => sum + a.review.score, 0) / analyses.length;
 
+  if (isLoading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="animate-pulse text-gray-500">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="py-12">
       <div className="container mx-auto px-4">
-        <div className="mb-10">
-          <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Track your code analysis history and environmental impact
-          </p>
+        <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="flex items-center gap-4">
+            {user && (
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-2xl font-bold">
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+            )}
+            <div>
+              <h1 className="text-3xl font-bold">
+                {user ? `Welcome, ${user.name}!` : "Dashboard"}
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400">
+                {user ? "Track your code's environmental impact" : "Sign in to save your analysis history"}
+              </p>
+            </div>
+          </div>
+          
+          {!user && (
+            <Link
+              href="/login"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-medium transition-colors"
+            >
+              <User className="w-5 h-5" />
+              Sign in to save history
+            </Link>
+          )}
         </div>
 
         <div className="grid md:grid-cols-4 gap-6 mb-10">
@@ -95,9 +140,10 @@ export default function DashboardPage() {
           <h2 className="text-xl font-semibold">Recent Analyses</h2>
           <Link
             href="/analyze"
-            className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
+            className="flex items-center gap-2 text-sm text-emerald-600 hover:text-emerald-700 font-medium"
           >
-            + New Analysis
+            <Upload className="w-4 h-4" />
+            New Analysis
           </Link>
         </div>
 
@@ -158,6 +204,7 @@ export default function DashboardPage() {
               href="/analyze"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-medium transition-colors"
             >
+              <Upload className="w-5 h-5" />
               Analyze Code
             </Link>
           </div>

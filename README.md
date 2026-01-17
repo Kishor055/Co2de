@@ -1,23 +1,40 @@
-# Co2de
+# 🌍 CO2DE - Code Environmental Impact Analyzer
 
-![Co2de Logo](resources/co2de_logo.png)
+![CO2DE Logo](resources/co2de_logo.png)
 
-A modern web application built with Next.js 16, React 19, and TailwindCSS 4.
+**CO2DE** helps developers instantly understand the environmental footprint of their code. It estimates energy/CO₂ impact and provides AI-powered insights with actionable optimizations.
 
-## 🚀 Tech Stack
+## 🎯 Vision
 
-- **Framework:** [Next.js 16](https://nextjs.org/) - React framework with App Router
-- **UI Library:** [React 19](https://react.dev/) - Latest React with concurrent features
-- **Styling:** [TailwindCSS 4](https://tailwindcss.com/) - Utility-first CSS framework
-- **Language:** [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
-- **Linting:** [ESLint 9](https://eslint.org/) - Code quality tool
+Every line of code has an environmental cost. CO2DE makes this visible, helping developers write more efficient, sustainable software.
 
-## 📦 Getting Started
+## ⚡ Features
+
+- **📤 Code Upload** - Drag-and-drop file upload supporting 100+ file types
+- **⚡ Energy Estimation** - Instant estimates of energy consumption and CO₂ footprint
+- **🤖 AI-Powered Review** - Intelligent analysis with optimization recommendations
+- **📊 Visual Dashboard** - Beautiful charts and metrics visualization
+- **🔄 Real-time Updates** - Live analysis with smooth animations
+
+## 🔧 Tech Stack
+
+| Category      | Technology               |
+| ------------- | ------------------------ |
+| Framework     | Next.js 16 (App Router)  |
+| UI            | React 19 + TailwindCSS 4 |
+| Animations    | CSS Animations           |
+| Charts        | Recharts                 |
+| File Upload   | react-dropzone           |
+| Validation    | Zod                      |
+| Backend Ready | Appwrite SDK             |
+| Icons         | Lucide React             |
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 18.18+
-- npm, yarn, or pnpm
+- Node.js 18+
+- npm or yarn
 
 ### Installation
 
@@ -25,48 +42,84 @@ A modern web application built with Next.js 16, React 19, and TailwindCSS 4.
 # Clone the repository
 git clone https://github.com/Govinda2809/Co2de.git
 
-# Navigate to the project
+# Navigate to project
 cd Co2de
 
 # Install dependencies
 npm install
 
-# Run the development server
+# Copy environment template
+cp .env.example .env.local
+
+# Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 ## 📁 Project Structure
 
 ```
 Co2de/
-├── app/                  # Next.js App Router pages
-│   ├── layout.tsx        # Root layout
-│   ├── page.tsx          # Home page
-│   └── globals.css       # Global styles
-├── public/               # Static assets
-├── resources/            # Project resources
-│   └── co2de_logo.png    # Project logo
-├── package.json          # Dependencies and scripts
-├── tailwind.config.ts    # TailwindCSS configuration
-├── tsconfig.json         # TypeScript configuration
-└── next.config.ts        # Next.js configuration
+├── app/                      # Next.js App Router pages
+│   ├── analyze/              # Code analysis page
+│   ├── dashboard/            # Analysis history
+│   ├── about/                # About page
+│   ├── layout.tsx            # Root layout
+│   ├── page.tsx              # Homepage
+│   └── globals.css           # Global styles
+├── components/
+│   ├── dashboard/            # Dashboard components
+│   │   ├── metrics-display   # Energy metrics cards
+│   │   ├── energy-chart      # Score visualization
+│   │   └── ai-review-card    # AI recommendations
+│   ├── layout/               # Header & Footer
+│   ├── ui/                   # Base UI components
+│   └── upload/               # File upload component
+├── lib/
+│   ├── appwrite.ts           # Appwrite client config
+│   ├── energy.ts             # Energy calculation logic
+│   ├── schemas.ts            # Zod validation schemas
+│   └── utils.ts              # Utility functions
+└── public/                   # Static assets
 ```
 
-## 🛠️ Available Scripts
+## 🛠️ How It Works
 
-| Command         | Description              |
-| --------------- | ------------------------ |
-| `npm run dev`   | Start development server |
-| `npm run build` | Build for production     |
-| `npm run start` | Start production server  |
-| `npm run lint`  | Run ESLint               |
+1. **Upload** - Drop your code file (supports .js, .ts, .py, .java, .rs, .go, etc.)
+2. **Analyze** - CO2DE scans for energy-intensive patterns
+3. **Estimate** - Get instant energy/CO₂ estimates based on heuristics
+4. **Optimize** - Receive AI-powered recommendations
+
+## 📊 Metrics Explained
+
+| Metric       | Description                      |
+| ------------ | -------------------------------- |
+| Energy (kWh) | Estimated energy consumption     |
+| CO₂ (gCO2e)  | Estimated carbon footprint       |
+| Complexity   | Code complexity factor (1.0-3.0) |
+| Score (1-10) | Overall energy efficiency rating |
+
+## 🌱 Why Green Software?
+
+- Tech accounts for **2-4% of global emissions**
+- Software energy use is growing **9% annually**
+- Efficient code = fewer servers = less cooling = lower impact
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-This project is private.
+This project is open source under the MIT License.
 
 ## 👤 Author
 
 **Govinda** - [GitHub](https://github.com/Govinda2809)
+
+---
+
+<p align="center">
+  Made with 💚 for the planet
+</p>

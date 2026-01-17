@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Leaf, Mail, Lock, User, ArrowRight, Loader2, CheckCircle } from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -13,6 +15,8 @@ export default function SignupPage() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const { signup } = useAuth();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,10 +28,13 @@ export default function SignupPage() {
     }
 
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    localStorage.setItem("co2de_user", JSON.stringify({ email: formData.email, name: formData.name }));
-    window.location.href = "/dashboard";
+    try {
+      await signup(formData.email, formData.password, formData.name);
+      router.push("/dashboard");
+    } catch (err: any) {
+      setError(err.message || "Failed to create account. Please try again.");
+      setIsLoading(false);
+    }
   };
 
   const benefits = [

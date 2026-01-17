@@ -129,45 +129,22 @@ export default function Home() {
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
                 Why Green Software Matters
               </h2>
-              <p className="text-emerald-100 mb-8">
+              <p className="text-emerald-100 mb-8 max-w-2xl">
                 The tech industry accounts for approximately 2-4% of global carbon emissions.
                 By making our code more efficient, we can collectively make a significant impact
-                on reducing our environmental footprint.
+                on reducing our environmental footprint. Software energy use is growing 9% annually,
+                and every optimization counts.
               </p>
-              <ul className="space-y-3">
+              <ul className="grid sm:grid-cols-2 gap-4">
                 {benefits.map((benefit) => (
                   <li key={benefit} className="flex items-center gap-3 text-white">
                     <CheckCircle className="w-5 h-5 text-emerald-200 shrink-0" />
-                    {benefit}
+                    <span className="text-sm font-medium">{benefit}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-white/10 rounded-3xl blur-xl" />
-              <div className="relative p-8 rounded-2xl bg-white/10 backdrop-blur border border-white/20">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-white/20">
-                    <Leaf className="w-6 h-6 text-white" />
-                  </div>
-                  <span className="text-white font-semibold">Sample Analysis</span>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-emerald-100">Energy Score</span>
-                    <span className="text-2xl font-bold text-white">8/10</span>
-                  </div>
-                  <div className="h-2 bg-white/20 rounded-full overflow-hidden">
-                    <div className="h-full w-4/5 bg-white rounded-full" />
-                  </div>
-                  <div className="pt-4 border-t border-white/20">
-                    <p className="text-sm text-emerald-100">
-                      "Consider using Promise.all for parallel async operations to reduce execution time by 25%"
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>

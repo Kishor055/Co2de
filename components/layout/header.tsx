@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { Leaf, Upload, BarChart3, Info, Github, User, LogOut, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { useAuth } from "@/hooks/use-auth";
+
 const navItems = [
   { href: "/", label: "Home", icon: Leaf },
   { href: "/analyze", label: "Analyze", icon: Upload },
@@ -15,24 +17,18 @@ const navItems = [
 
 export function Header() {
   const pathname = usePathname();
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const { user, logout } = useAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  useEffect(() => {
-    const stored = localStorage.getItem("co2de_user");
-    if (stored) {
-      try {
-        setUser(JSON.parse(stored));
-      } catch {}
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setShowUserMenu(false);
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("co2de_user");
-    setUser(null);
-    setShowUserMenu(false);
-    window.location.href = "/";
   };
 
   return (

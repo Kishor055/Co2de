@@ -3,22 +3,29 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Leaf, Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
+import { useAuth } from "@/hooks/use-auth";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const { login } = useAuth();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    localStorage.setItem("co2de_user", JSON.stringify({ email, name: email.split("@")[0] }));
-    window.location.href = "/dashboard";
+    try {
+      await login(email, password);
+      router.push("/dashboard");
+    } catch (err: any) {
+      setError(err.message || "Failed to sign in. Please check your credentials.");
+      setIsLoading(false);
+    }
   };
 
   return (

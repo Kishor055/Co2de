@@ -123,3 +123,8 @@ This project is open source under the MIT License.
 <p align="center">
   Made with 💚 for the planet
 </p>
+CO2DE helps developers instantly understand the environmental footprint of their code.
+It estimates energy usage and CO₂ emissions and provides AI‑powered insights with optimization suggestions.
+
+Vision:
+Every line of code has an environmental cost — CO2DE makes this visible and actionable for developers.
